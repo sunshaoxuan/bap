@@ -1,0 +1,73 @@
+server:
+  port: 8300
+mapper:
+  mappers:
+    jp.co.bobb.upms.mapper
+eureka:
+  instance:
+    prefer-ip-address: true #使用IP注册
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://172.31.36.103:8100/eureka/
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+###feign 默认关闭熔断，请看HystrixFeignConfiguration
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+qq:
+  captcha:
+    url: https://ssl.captcha.qq.com/ticket/verify
+    appId: 2044603328
+    appSecretKey: 0PWpnM6rTO0nE231PwDXxQQ**
+
+spring:
+  application:
+    name: bobb-upms
+  datasource:
+    url: jdbc:mysql://fx-test.cooymm0c3chi.ap-northeast-1.rds.amazonaws.com:3306/cloud_upms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: fxtest
+    password: osaka123456
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 192.168.1.103
+    port: 6379
+    password: bobbjp888
+    database: 1
+  rabbitmq:
+    host: 192.168.1.103
+    username: canal
+    port: 5672
+    password: canal
+    virtual-host: /
+    publisher-confirms: true
+    cache:
+      connection:
+        mode: channel
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB

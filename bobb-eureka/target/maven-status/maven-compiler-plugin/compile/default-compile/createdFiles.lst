@@ -1,0 +1,4 @@
+jp/co/bobb/eureka/listener/InstanceCancelListener.class
+jp/co/bobb/eureka/listener/InstanceRenewListener.class
+jp/co/bobb/eureka/EurekaApplication.class
+jp/co/bobb/eureka/listener/InstanceRegisterListener.class

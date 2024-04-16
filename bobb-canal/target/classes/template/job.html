@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="width:100%;height:100%;background:#f5f8fa">
+<div style="padding:20px;width: 40%;min-width: 300px;margin: 0 auto;border: 1px solid #ccc;background: #fff;box-shadow: 0 1px 6px 0 #7f8182">
+    <div style="padding: 20px 0 0 0;color: #676262;margin-top: 5px;">
+        <h4 style="padding-left: 10px;border-left: 3px solid #30b2a4;">お客様情報</h4>
+        <div style="margin:10px 20px;line-height:26px;">
+            <span>お名前:&nbsp;&nbsp;</span><span th:text="${name}"></span><br>
+            <span>フリガナ:&nbsp;&nbsp;</span><span th:text="${nameJP}"></span><br>
+            <span>性别:&nbsp;&nbsp;</span><span th:text="${sex}"></span><br>
+            <span>ご住所:&nbsp;&nbsp;</span><span th:text="${address}"></span><br>
+            <span>お電話番号:&nbsp;&nbsp;</span><span th:text="${phone}"></span><br>
+            <span>メールアドレス:&nbsp;&nbsp;</span><span th:text="${email}"></span><br>
+            <span>日中連絡可能な時間帯:&nbsp;&nbsp;</span><span th:text="${lineTime}"></span><br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+spring:
+  rabbitmq:
+    host: 172.31.38.83
+    username: canal
+    port: 5672
+    password: canal
+    virtual-host: /
+    publisher-confirms: true
+    cache:
+      connection:
+        mode: channel
+canal:
+  server:
+    host: 54.249.110.97
+    port: 11111
+    instance-vip: vip
+    batchSize: 1000
+    sleep: 1000
+canal1:
+  server:
+    host: 54.249.110.97
+    port: 11111
+    instance-vip: vip
+    batchSize: 1000
+    sleep: 1000

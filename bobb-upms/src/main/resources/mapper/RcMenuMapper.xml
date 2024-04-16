@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.bobb.upms.mapper.RcMenuMapper">
+    <resultMap id="BaseResultMap" type="jp.co.bobb.upms.entity.RcMenu">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="p_code" jdbcType="VARCHAR" property="pCode"/>
+        <result column="p_id" jdbcType="VARCHAR" property="pId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="is_menu" jdbcType="INTEGER" property="isMenu"/>
+        <result column="page_url" jdbcType="VARCHAR" property="pageUrl"/>
+        <result column="level" jdbcType="INTEGER" property="level"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="domain" jdbcType="VARCHAR" property="domain"/>
+    </resultMap>
+    <select id="queryChildMenus" resultMap="BaseResultMap" parameterType="java.util.Map">
+
+        SELECT DISTINCT
+        b.id,
+        b.CODE,
+        b.NAME,
+        b.p_code,
+        b.p_id,
+        b.url,
+        b.page_url,
+        b.is_menu,
+        b.LEVEL,
+        b.sort,
+        b.STATUS,
+        b.create_time
+        FROM
+        rc_menu AS b
+        <if test="userId != null">
+            JOIN rc_privilege AS a ON b.id = a.menu_id
+            AND a.role_id IN ( SELECT role_id FROM rc_user_role WHERE user_id = #{userId}
+            union select org_role_id from rc_oa_org_role_user where user_id = #{userId}
+            union select a.role_id from rc_oa_org_role as a join rc_oa_org_role_user as b on a.id = b.org_role_id where
+            b.user_id = #{userId} )
+        </if>
+        WHERE 1=1
+        <if test="pId == '0'">
+            b.is_menu = 1 AND b.p_id > '0'
+        </if>
+        <if test="pId != '0'">
+            AND b.p_id = #{pId}
+        </if>
+        <if test="system != null">
+            AND b.system = #{system}
+        </if>
+        ORDER BY b.sort
+    </select>
+
+    <select id="queryChildMenusByRoles" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT DISTINCT
+        b.id, b.CODE, b.NAME, b.p_code, b.p_id, b.url, b.page_url,
+        b.is_menu, b.LEVEL, b.sort, b.STATUS, b.create_time, b.domain, b.icon
+        FROM rc_menu AS b
+        <if test="list != null and list.size() != 0 ">
+            JOIN rc_privilege AS a ON b.id = a.menu_id
+            AND a.role_id IN
+            <foreach item="item" collection="list" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+        <where>
+            <if test="domain != null and domain !=''">
+                AND b.domain = #{domain}
+            </if>
+            <if test="pId == '0'">
+                AND b.is_menu = 1 AND b.p_id > '0'
+            </if>
+            <if test="pId != '0'">
+                AND b.p_id = #{pId}
+            </if>
+            <if test="system != null">
+                AND b.system = #{system}
+            </if>
+        </where>
+        ORDER BY b.sort
+    </select>
+
+    <select id="getResoureByRoleIdList" parameterType="java.util.List" resultMap="BaseResultMap">
+        select menu.* from rc_menu menu,rc_privilege p where menu.id=p.menu_id and p.role_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <delete id="deleteMenuBatch" parameterType="java.util.Set">
+        delete from rc_menu where id in
+        <foreach collection="set" open="(" separator="," close=")" item="val">
+            ${val}
+        </foreach>
+    </delete>
+
+    <select id="queryMenusByParendIds" parameterType="java.util.Set" resultMap="BaseResultMap">
+        select * from rc_menu where p_id in
+        <foreach collection="set" open="(" separator="," close=")" item="val">
+            ${val}
+        </foreach>
+    </select>
+    <update id="updateByIdSelective" parameterType="jp.co.bobb.upms.entity.RcMenu">
+        update rc_menu
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="pCode != null">
+                p_code = #{pCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                p_id = #{pId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pageUrl != null">
+                page_url = #{pageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="isMenu != null">
+                is_menu = #{isMenu,jdbcType=INTEGER},
+            </if>
+            <if test="level != null">
+                `level` = #{level,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="system != null">
+                `system` = #{system,jdbcType=VARCHAR},
+            </if>
+            <if test="domain != null">
+                `domain` = #{domain,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

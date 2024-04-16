@@ -1,0 +1,56 @@
+server:
+  port: 8123
+  undertow:
+    max-http-post-size: 0
+    io-threads: 1
+    worker-threads: 8
+    buffer-size: 1024
+    direct-buffers: true
+spring:
+  rabbitmq:
+    #host: 54.199.150.94
+    #virtual-host: canal
+    host: 13.115.249.46
+    virtual-host: /
+    username: canal
+    port: 5672
+    password: canal
+    publisher-confirms: true
+    cache:
+      connection:
+        mode: channel
+  thymeleaf:
+    prefix: classpath:/template/
+    suffix: .html
+    mode: LEGACYHTML5
+    cache: false
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: app@bobb.com
+    password: svdnpvhqfcqwmvgu
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+canal:
+  server:
+    host: 54.250.163.138
+    port: 11111
+    instance-vip: bobb
+    batchSize: 1000
+    sleep: 1000
+    database: bobb_db
+canal1:
+  server:
+    host: 54.250.163.138
+    port: 11111
+    instance-vip: bobb
+    batchSize: 1000
+    sleep: 1000
+    database: test-vip
+file:
+  upload:
+    path: /Users/jesse/work-bobb

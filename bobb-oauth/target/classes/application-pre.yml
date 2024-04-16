@@ -1,0 +1,66 @@
+server:
+  port: 8000
+eureka:
+  instance:
+    prefer-ip-address: true #ʹ��IPע��
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://172.31.36.103:8100/eureka/
+endpoints:
+  health:
+    sensitive: false
+    enabled: true
+management:
+  security:
+    enabled: false
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+logging:
+  config: classpath:logback.xml
+  level:
+    org:
+      springframework:
+        web: info
+###feign 默认关闭熔断，请看HystrixFeignConfiguration
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+spring:
+  application:
+    name: bobb-oauth
+  zipkin:
+    base-url: http://localhost:8000
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://fx-test.cooymm0c3chi.ap-northeast-1.rds.amazonaws.com:3306/cloud_upms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: fxtest
+    password: osaka123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 192.168.1.103
+    port: 6379
+    database: 2
+    password: bobbjp888
+

@@ -1,0 +1,69 @@
+server:
+  port: 8300
+  undertow:
+    max-http-post-size: 0
+    io-threads: 1
+    worker-threads: 8
+    buffer-size: 1024
+    direct-buffers: true
+mapper:
+  mappers:
+    jp.co.bobb.upms.mapper
+eureka:
+  instance:
+    prefer-ip-address: true #使用IP注册
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    ##续约更新时间间隔设置5秒，m默认30s
+    lease-renewal-interval-in-seconds: 5
+    ##续约到期时间10秒，默认是90秒
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://localhost:8100/eureka/
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+qq:
+  captcha:
+    url: https://ssl.captcha.qq.com/ticket/verify
+    appId: 2044603328
+    appSecretKey: 0PWpnM6rTO0nE231PwDXxQQ**
+
+spring:
+  application:
+    name: bobb-upms
+  datasource:
+    url: jdbc:mysql://fx-test.cooymm0c3chi.ap-northeast-1.rds.amazonaws.com:3306/cloud_upms?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: fxtest
+    password: osaka123456
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 3.112.245.235
+    port: 6379
+    database: 0
+    password: redisredis
+  rabbitmq:
+    host: 54.199.150.94
+    username: canal
+    port: 5672
+    password: canal
+    virtual-host: /
+    publisher-confirms: true
+    cache:
+      connection:
+        mode: channel
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+logging:
+  level:
+    jp.co.bobb.upms.mapper: trace
+login:
+  aes:
+    key: ookawasebirukura
+    iv: fkabushikigaisha

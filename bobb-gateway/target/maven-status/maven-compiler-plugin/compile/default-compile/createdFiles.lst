@@ -1,0 +1,4 @@
+jp/co/bobb/gateway/filter/PreRequestFilter.class
+jp/co/bobb/gateway/service/impl/PermissionServiceImpl.class
+jp/co/bobb/gateway/model/ErrorCode.class
+jp/co/bobb/gateway/service/PermissionService.class

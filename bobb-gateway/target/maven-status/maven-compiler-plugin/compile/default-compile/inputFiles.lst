@@ -1,0 +1,14 @@
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/model/ErrorCode.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/service/impl/PermissionServiceImpl.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/filter/PreRequestFilter.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/service/PermissionService.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/fallback/ServiceFallbackProvider.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/config/SecurityConfig.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/filter/ErrorRequestFilter.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/filter/PostRequestFilter.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/config/CatFilterConfigure.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/config/WebMvcConfigurerConfig.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/config/swagger/GatewaySwaggerResourcesProvider.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/config/swagger/Swagger2Config.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/GatewayApplication.java
+/Users/user/同步空间/projects/BoBBFramework/bobb-gateway/src/main/java/jp/co/bobb/gateway/model/Msg.java

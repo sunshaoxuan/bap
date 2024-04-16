@@ -1,0 +1,19 @@
+server:
+  port: 9000
+  undertow:
+    max-http-post-size: 0
+    io-threads: 1
+    worker-threads: 8
+    buffer-size: 1024
+    direct-buffers: true
+spring:
+  rabbitmq:
+    host: 13.115.249.46
+    username: canal
+    port: 5672
+    password: canal
+    virtual-host: /
+    publisher-confirms: true
+    cache:
+      connection:
+        mode: channel

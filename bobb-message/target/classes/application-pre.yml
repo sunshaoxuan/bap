@@ -1,0 +1,11 @@
+spring:
+  rabbitmq:
+    host: 172.31.38.83
+    username: canal
+    port: 5672
+    password: canal
+    virtual-host: /
+    publisher-confirms: true
+    cache:
+      connection:
+        mode: channel
